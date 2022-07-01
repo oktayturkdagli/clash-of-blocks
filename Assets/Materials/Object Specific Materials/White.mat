@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Gray
+  m_Name: White
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ValidKeywords: []
   m_InvalidKeywords:
@@ -205,7 +205,7 @@ Material:
     m_Colors:
     - _AmbientColor: {r: 0.4, g: 0.4, b: 0.4, a: 1}
     - _BaseColor: {r: 0.6901961, g: 0.7647059, b: 0.2901961, a: 1}
-    - _Color: {r: 0.6345264, g: 0.6415094, b: 0.5961196, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _FresnelColor: {r: 1, g: 1, b: 1, a: 1}
     - _HColor: {r: 0, g: 0.08572531, b: 1, a: 1}
