@@ -10,10 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ab4a1998e334dfb97e34a34ca8bd03a, type: 3}
-  m_Name: SOUserData
+  m_Name: User Data
   m_EditorClassIdentifier: 
   currentLevel: 1
-  highestLevel: 10
+  highestLevel: 1
   totalGold: 0
-  bestTotalGold: 0
-  totalStack: 0

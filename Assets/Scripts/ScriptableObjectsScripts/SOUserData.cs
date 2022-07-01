@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "SOUserData", menuName = "ScriptableObjects/User Data")]
+[CreateAssetMenu(menuName = "Scriptable Objects/User Data", fileName = "New User Data")]
 public class SOUserData : ScriptableObject
 {
     [SerializeField] public int currentLevel = 1;
