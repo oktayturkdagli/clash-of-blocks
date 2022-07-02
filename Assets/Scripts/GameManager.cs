@@ -2,33 +2,35 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    void Start()
+    [SerializeField] SOLevelData levelData;
+
+    private void Start()
     {
-        EventManager.current.onStartGame += OnStartGame;
-        EventManager.current.onFinishGame += OnFinishGame;
+        levelData.DrawLevel();
+        if (Camera.main != null) Camera.main.transform.position = levelData.GetCameraPosition();
         EventManager.current.OnStartGame();
     }
 
-    void OnStartGame()
+    private void OnEnable()
     {
-        Debug.Log("Game is START!");
-        Invoke(nameof(LateStart), 1f); // Game starts 1 second late to wait for all classes to load correctly
+        EventManager.current.onStartGame += OnStartGame;
+        EventManager.current.onFinishGame += OnFinishGame;
     }
 
-    void OnFinishGame()
-    {
-        Debug.Log("Game is OVER!");
-    }
-
-  
-    void LateStart()
-    {
-        
-    }
-
-    void OnDestroy()
+    private void OnDisable()
     {
         EventManager.current.onStartGame -= OnStartGame;
         EventManager.current.onFinishGame -= OnFinishGame;
     }
+
+    void OnStartGame()
+    {
+        // Debug.Log("Game is START!");
+    }
+
+    void OnFinishGame()
+    {
+        // Debug.Log("Game is OVER!");
+    }
+    
 }

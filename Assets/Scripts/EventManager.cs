@@ -27,9 +27,3 @@ public class EventManager : MonoBehaviour
     }
 }
 
-//ENUMs are used for ease of naming when transferring data
-public enum DataType
-{
-    PlayerData
-}
-
