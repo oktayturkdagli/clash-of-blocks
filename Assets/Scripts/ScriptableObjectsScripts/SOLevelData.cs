@@ -18,7 +18,8 @@ public class SOLevelData : ScriptableObject
     {
         float x = 0f, y = 6, z = -2f;
         x += levels[levelIndex - 1].width * 0.45f;
-        y += levels[levelIndex - 1].height * 2f;
+        y += levels[levelIndex - 1].width * 2f;
+        z += levels[levelIndex - 1].height * 0.1f;
         return new Vector3(x, y, z);
     }
     

@@ -81,29 +81,29 @@ public class LevelEditor : Editor
     private void Draw3DObjectOnScene()
     {
         Handles.color = Color.white;
-        for (int i = 0; i < level.GroundPositions.Count; i++)
+        for (int i = 0; i < level.groundPositions.Count; i++)
         {
-            Handles.DrawWireCube(level.GroundPositions[i], new Vector3(1,0f,1));
+            Handles.DrawWireCube(level.groundPositions[i], new Vector3(1,0f,1));
         }
         Handles.color = Color.black;
-        for (int i = 0; i < level.BorderPositions.Count; i++)
+        for (int i = 0; i < level.borderPositions.Count; i++)
         {
-            Handles.DrawWireCube(level.BorderPositions[i], Vector3.one);
+            Handles.DrawWireCube(level.borderPositions[i], Vector3.one);
         }
         Handles.color = Color.green;
-        for (int i = 0; i < level.CubeGreenPositions.Count; i++)
+        for (int i = 0; i < level.cubeGreenPositions.Count; i++)
         {
-            Handles.DrawWireCube(level.CubeGreenPositions[i], Vector3.one);
+            Handles.DrawWireCube(level.cubeGreenPositions[i], Vector3.one);
         }
         Handles.color = Color.red;
-        for (int i = 0; i < level.CubeRedPositions.Count; i++)
+        for (int i = 0; i < level.cubeRedPositions.Count; i++)
         {
-            Handles.DrawWireCube(level.CubeRedPositions[i], Vector3.one);
+            Handles.DrawWireCube(level.cubeRedPositions[i], Vector3.one);
         }
         Handles.color = Color.yellow;
-        for (int i = 0; i < level.CubeYellowPositions.Count; i++)
+        for (int i = 0; i < level.cubeYellowPositions.Count; i++)
         {
-            Handles.DrawWireCube(level.CubeYellowPositions[i], Vector3.one);
+            Handles.DrawWireCube(level.cubeYellowPositions[i], Vector3.one);
         }
     }
     
@@ -145,19 +145,19 @@ public class LevelEditor : Editor
             case "Erase":
                 break;
             case "Ground":
-                level.GroundPositions.Add(position);
+                level.groundPositions.Add(position);
                 break;
             case "Border":
-                level.BorderPositions.Add(position);
+                level.borderPositions.Add(position);
                 break;
             case "CubeGreen":
-                level.CubeGreenPositions.Add(position);
+                level.cubeGreenPositions.Add(position);
                 break;
             case "CubeRed":
-                level.CubeRedPositions.Add(position);
+                level.cubeRedPositions.Add(position);
                 break;
             case "CubeYellow":
-                level.CubeYellowPositions.Add(position);
+                level.cubeYellowPositions.Add(position);
                 break;
         }
     }
@@ -180,21 +180,21 @@ public class LevelEditor : Editor
     {
         if (!(itemTypes[selectedItem].Equals("CubeRed") || itemTypes[selectedItem].Equals("CubeGreen") || itemTypes[selectedItem].Equals("CubeYellow")))
         {
-            if (level.GroundPositions.Contains(position))
-                level.GroundPositions.Remove(position);
+            if (level.groundPositions.Contains(position))
+                level.groundPositions.Remove(position);
         }
         
-        if (level.BorderPositions.Contains(position))
-            level.BorderPositions.Remove(position);
+        if (level.borderPositions.Contains(position))
+            level.borderPositions.Remove(position);
         
-        if (level.CubeGreenPositions.Contains(position))
-            level.CubeGreenPositions.Remove(position);
+        if (level.cubeGreenPositions.Contains(position))
+            level.cubeGreenPositions.Remove(position);
         
-        if (level.CubeRedPositions.Contains(position))
-            level.CubeRedPositions.Remove(position);
+        if (level.cubeRedPositions.Contains(position))
+            level.cubeRedPositions.Remove(position);
         
-        if (level.CubeYellowPositions.Contains(position))
-            level.CubeYellowPositions.Remove(position);
+        if (level.cubeYellowPositions.Contains(position))
+            level.cubeYellowPositions.Remove(position);
     }
 
     private void Clear()
@@ -204,19 +204,19 @@ public class LevelEditor : Editor
             case "Erase":
                 break;
             case "Ground":
-                level.GroundPositions.Clear();
+                level.groundPositions.Clear();
                 break;
             case "Border":
-                level.BorderPositions.Clear();
+                level.borderPositions.Clear();
                 break;
             case "CubeGreen":
-                level.CubeGreenPositions.Clear();
+                level.cubeGreenPositions.Clear();
                 break;
             case "CubeRed":
-                level.CubeRedPositions.Clear();
+                level.cubeRedPositions.Clear();
                 break;
             case "CubeYellow":
-                level.CubeYellowPositions.Clear();
+                level.cubeYellowPositions.Clear();
                 break;
         }
     }

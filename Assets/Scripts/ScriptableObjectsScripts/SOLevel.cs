@@ -5,11 +5,11 @@ using System.Linq;
 [CreateAssetMenu(menuName = "Scriptable Objects/Level", fileName = "New Level")]
 public class SOLevel : ScriptableObject
 {
-    public List<Vector3> GroundPositions = new List<Vector3>();
-    public List<Vector3> BorderPositions = new List<Vector3>();
-    public List<Vector3> CubeGreenPositions = new List<Vector3>();
-    public List<Vector3> CubeRedPositions = new List<Vector3>();
-    public List<Vector3> CubeYellowPositions = new List<Vector3>();
+    public List<Vector3> groundPositions = new List<Vector3>();
+    public List<Vector3> borderPositions = new List<Vector3>();
+    public List<Vector3> cubeGreenPositions = new List<Vector3>();
+    public List<Vector3> cubeRedPositions = new List<Vector3>();
+    public List<Vector3> cubeYellowPositions = new List<Vector3>();
 
     public int width = 5;
     public int height = 5;
@@ -17,11 +17,11 @@ public class SOLevel : ScriptableObject
     public void CreateLevel()
     {
         Dictionary<string, List<Vector3>> dictionary = new Dictionary<string, List<Vector3>>();
-        dictionary.Add("Ground", GroundPositions);
-        dictionary.Add("Border", BorderPositions);
-        dictionary.Add("CubeGreen", CubeGreenPositions);
-        dictionary.Add("CubeRed", CubeRedPositions);
-        dictionary.Add("CubeYellow", CubeYellowPositions);
+        dictionary.Add("Ground", groundPositions);
+        dictionary.Add("Border", borderPositions);
+        dictionary.Add("CubeGreen", cubeGreenPositions);
+        dictionary.Add("CubeRed", cubeRedPositions);
+        dictionary.Add("CubeYellow", cubeYellowPositions);
         
         for (int i = 0; i < dictionary.Count; i++)
         {
