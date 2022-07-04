@@ -190,19 +190,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolItems:
-  - name: Ground
+  - type: 1
     prefab: {fileID: 1515847331114504163, guid: 751034178c4e34a95a40cf1a71583f57, type: 3}
     amount: 200
-  - name: Border
+  - type: 2
     prefab: {fileID: 7371676326487800259, guid: d45d0ccf548f246c8a4dcd8ef4434a7f, type: 3}
     amount: 200
-  - name: CubeGreen
+  - type: 3
     prefab: {fileID: 5015131333236184892, guid: 5816968f5dd7d48e79b272547c65e7b4, type: 3}
     amount: 200
-  - name: CubeRed
+  - type: 4
     prefab: {fileID: 821318346965981772, guid: 9ccfd2a4a94144aefacc8130e8419b94, type: 3}
     amount: 200
-  - name: CubeYellow
+  - type: 5
     prefab: {fileID: 3921482962312680643, guid: 55396e6a4afa04dddbe2fe5df4cb1aec, type: 3}
     amount: 200
 --- !u!4 &94286540

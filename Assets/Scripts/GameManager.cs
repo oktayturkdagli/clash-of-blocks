@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
         levelData.DrawLevel();
         cam = Camera.main;
         if (cam != null) cam.transform.position = levelData.GetCameraPosition();
-        GameObject item = ObjectPool.SharedInstance.GetPooledObject("CubeGreen", new Vector3(100,3,100), Vector3.zero);
+        GameObject item = ObjectPool.SharedInstance.GetPooledObject(ItemTypes.CubeGreen, new Vector3(100,3,100), Vector3.zero);
         playerCubes.Add(item);
         EventManager.current.OnStartGame();
     }

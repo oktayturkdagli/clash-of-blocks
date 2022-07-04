@@ -14,7 +14,7 @@ public class LevelEditor : Editor
         "\nErase option deletes the objects you specify with the pointer\n";
 
     private bool onMouseDown = false;
-    private string[] itemTypes = new[] { "Erase", "Ground", "Border", "CubeGreen", "CubeRed", "CubeYellow"};
+    private string[] itemTypesText = new[] { "Erase", "Ground", "Border", "CubeGreen", "CubeRed", "CubeYellow"};
     private int selectedItem = 0;
 
     private void OnEnable()
@@ -69,7 +69,7 @@ public class LevelEditor : Editor
         if (GUILayout.Button("Draw Width x Height Ground"))
             CreateGround();
         
-        selectedItem = GUILayout.Toolbar(selectedItem, itemTypes);
+        selectedItem = GUILayout.Toolbar(selectedItem, itemTypesText);
         
         EditorGUILayout.Space(20); GUILayout.Label("Clear", EditorStyles.boldLabel); EditorGUILayout.Space();
         if (GUILayout.Button("Remove Last"))
@@ -80,30 +80,31 @@ public class LevelEditor : Editor
     
     private void Draw3DObjectOnScene()
     {
-        Handles.color = Color.white;
-        for (int i = 0; i < level.groundPositions.Count; i++)
+        for (int i = 0; i < level.levelItems.Count; i++)
         {
-            Handles.DrawWireCube(level.groundPositions[i], new Vector3(1,0f,1));
-        }
-        Handles.color = Color.black;
-        for (int i = 0; i < level.borderPositions.Count; i++)
-        {
-            Handles.DrawWireCube(level.borderPositions[i], Vector3.one);
-        }
-        Handles.color = Color.green;
-        for (int i = 0; i < level.cubeGreenPositions.Count; i++)
-        {
-            Handles.DrawWireCube(level.cubeGreenPositions[i], Vector3.one);
-        }
-        Handles.color = Color.red;
-        for (int i = 0; i < level.cubeRedPositions.Count; i++)
-        {
-            Handles.DrawWireCube(level.cubeRedPositions[i], Vector3.one);
-        }
-        Handles.color = Color.yellow;
-        for (int i = 0; i < level.cubeYellowPositions.Count; i++)
-        {
-            Handles.DrawWireCube(level.cubeYellowPositions[i], Vector3.one);
+            switch (level.levelItems[i].type)
+            {
+                case ItemTypes.Ground:
+                    Handles.color = Color.white;
+                    Handles.DrawWireCube(level.levelItems[i].position, new Vector3(1,0f,1));
+                    break;
+                case ItemTypes.Border:
+                    Handles.color = Color.black;
+                    Handles.DrawWireCube(level.levelItems[i].position, Vector3.one);
+                    break;
+                case ItemTypes.CubeGreen:
+                    Handles.color = Color.green;
+                    Handles.DrawWireCube(level.levelItems[i].position, Vector3.one);
+                    break;
+                case ItemTypes.CubeRed:
+                    Handles.color = Color.red;
+                    Handles.DrawWireCube(level.levelItems[i].position, Vector3.one);
+                    break;
+                case ItemTypes.CubeYellow:
+                    Handles.color = Color.yellow;
+                    Handles.DrawWireCube(level.levelItems[i].position, Vector3.one);
+                    break;
+            }
         }
     }
     
@@ -140,86 +141,120 @@ public class LevelEditor : Editor
     
     private void CreateObject(Vector3 position)
     {
-        switch (itemTypes[selectedItem])
-        {
-            case "Erase":
-                break;
-            case "Ground":
-                level.groundPositions.Add(position);
-                break;
-            case "Border":
-                level.borderPositions.Add(position);
-                break;
-            case "CubeGreen":
-                level.cubeGreenPositions.Add(position);
-                break;
-            case "CubeRed":
-                level.cubeRedPositions.Add(position);
-                break;
-            case "CubeYellow":
-                level.cubeYellowPositions.Add(position);
-                break;
-        }
+        ItemTypes tempItemType = ItemTypeConvert(itemTypesText[selectedItem]);
+        if (tempItemType == ItemTypes.Null)
+            return;
+        
+        LevelItem levelItem = new LevelItem(tempItemType, position);
+        level.levelItems.Add(levelItem);
     }
     
     private void CreateGround()
     {
+        level.levelItems.Clear();
         for (var i = 0; i < level.width; i++)
         {
+            var position = Vector3.zero;
+
             for (var j = 0; j < level.height; j++)
             {
-                var position = new Vector3(i, 0f, j);
+                position = new Vector3(i, 0f, j);
                 selectedItem = 1;
-                RemoveAt(position);
                 CreateObject(position);
+                
+                //For Borders
+                if (j == 0)
+                {
+                    selectedItem = 2;
+                    position = new Vector3(i, 0f, j-1);
+                    CreateObject(position);
+                }
+                
+                if (j == level.height - 1)
+                {
+                    selectedItem = 2;
+                    position = new Vector3(i, 0f, j+1);
+                    CreateObject(position);
+                }
+
+                if (i == 0)
+                {
+                    selectedItem = 2;
+                    position = new Vector3(i - 1, 0f, j);
+                    CreateObject(position);
+                }
+                
+                if (i == level.width - 1)
+                {
+                    selectedItem = 2;
+                    position = new Vector3(i + 1, 0f, j);
+                    CreateObject(position);
+                }
             }
+
+            
+            
+            
+            
         }
     }
     
     private void RemoveAt(Vector3 position)
     {
-        if (!(itemTypes[selectedItem].Equals("CubeRed") || itemTypes[selectedItem].Equals("CubeGreen") || itemTypes[selectedItem].Equals("CubeYellow")))
+        for (int i = 0; i < level.levelItems.Count; i++)
         {
-            if (level.groundPositions.Contains(position))
-                level.groundPositions.Remove(position);
+            if (level.levelItems[i].position == position)
+            {
+                if (level.levelItems[i].type == ItemTypes.Ground && 
+                    (itemTypesText[selectedItem].Equals("CubeRed") || itemTypesText[selectedItem].Equals("CubeGreen") || itemTypesText[selectedItem].Equals("CubeYellow")))
+                {
+                    //Do Nothing
+                }
+                else
+                {
+                    level.levelItems.RemoveAt(i);
+                    break;
+                }
+            }
         }
-        
-        if (level.borderPositions.Contains(position))
-            level.borderPositions.Remove(position);
-        
-        if (level.cubeGreenPositions.Contains(position))
-            level.cubeGreenPositions.Remove(position);
-        
-        if (level.cubeRedPositions.Contains(position))
-            level.cubeRedPositions.Remove(position);
-        
-        if (level.cubeYellowPositions.Contains(position))
-            level.cubeYellowPositions.Remove(position);
     }
 
     private void Clear()
     {
-        switch (itemTypes[selectedItem])
+        ItemTypes tempItemType = ItemTypeConvert(itemTypesText[selectedItem]);
+        if (tempItemType == ItemTypes.Null)
+            return;
+
+        for (int i = 0; i < level.levelItems.Count; i++)
         {
-            case "Erase":
-                break;
-            case "Ground":
-                level.groundPositions.Clear();
-                break;
-            case "Border":
-                level.borderPositions.Clear();
-                break;
-            case "CubeGreen":
-                level.cubeGreenPositions.Clear();
-                break;
-            case "CubeRed":
-                level.cubeRedPositions.Clear();
-                break;
-            case "CubeYellow":
-                level.cubeYellowPositions.Clear();
-                break;
+            if (level.levelItems[i].type == tempItemType)
+            {
+                level.levelItems.RemoveAt(i);
+                i--;
+            }
         }
     }
+    
+    private ItemTypes ItemTypeConvert(string text)
+    {
+        switch (text)
+        {
+            case "Ground":
+                return ItemTypes.Ground; 
+            case "Border":
+                return ItemTypes.Border;
+            case "CubeGreen":
+                return ItemTypes.CubeGreen;
+            case "CubeRed":
+                return ItemTypes.CubeRed;
+            case "CubeYellow":
+                return ItemTypes.CubeYellow;
+        }
+
+        return ItemTypes.Null;
+    }
+    
+    
     
 }
 #endif
