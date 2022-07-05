@@ -7,13 +7,18 @@ using UnityEngine;
 public class CubeController : MonoBehaviour
 {
     [SerializeField] private GameManager gameManager;
-    private bool canSpread = true;
-    private Queue<LevelItem> waitingQueue = new Queue<LevelItem>();
+    [SerializeField] private float animationDuration = 1f;
+    private Dictionary<ItemTypes, Queue<LevelItem>> Queues = new Dictionary<ItemTypes, Queue<LevelItem>>();
     private Vector3[] directions = { Vector3.left, Vector3.right, Vector3.forward, Vector3.back };
+    private bool canSpread = true;
+    
 
     private void OnEnable()
     {
         EventManager.current.onStartSpread += OnStartSpread;
+        Queues.Add(ItemTypes.CubeGreen, new Queue<LevelItem>());
+        Queues.Add(ItemTypes.CubeRed, new Queue<LevelItem>());
+        Queues.Add(ItemTypes.CubeYellow, new Queue<LevelItem>());
     }
 
     private void OnDisable()
@@ -25,7 +30,6 @@ public class CubeController : MonoBehaviour
     {
         if (canSpread)
         {
-            Debug.Log("I am spread");
             FindStartItemsAndAddQueue();
             HandleQueue();
         }
@@ -35,9 +39,17 @@ public class CubeController : MonoBehaviour
     {
         for (int i = 0; i < gameManager.levelGrid.Count; i++)
         {
-            if (gameManager.levelGrid[i].type is ItemTypes.CubeGreen or ItemTypes.CubeRed or ItemTypes.CubeYellow)
+            if (gameManager.levelGrid[i].type is ItemTypes.CubeGreen)
             {
-                waitingQueue.Enqueue(gameManager.levelGrid[i]);
+                Queues[ItemTypes.CubeGreen].Enqueue(gameManager.levelGrid[i]);
+            }
+            else if (gameManager.levelGrid[i].type is ItemTypes.CubeRed)
+            {
+                Queues[ItemTypes.CubeRed].Enqueue(gameManager.levelGrid[i]);
+            }
+            else if (gameManager.levelGrid[i].type is ItemTypes.CubeYellow)
+            {
+                Queues[ItemTypes.CubeYellow].Enqueue(gameManager.levelGrid[i]);
             }
         }
     }
@@ -45,11 +57,24 @@ public class CubeController : MonoBehaviour
     // When the placement animations are finished, return to this method again.
     private void HandleQueue()
     {
-        if (waitingQueue.Count > 0)
+        int biggestQueueLength = 0;
+        for (int i = 0; i < Queues.Count; i++)
         {
-            LevelItem item = waitingQueue.Dequeue();
-            List<LevelItem> emptyNeighbors = FindEmptyNeighbors(item); 
-            PlaceCubes(item, emptyNeighbors);
+            Queue<LevelItem> queue = Queues.ElementAt(i).Value;
+            if (queue.Count > 0)
+            {
+                LevelItem item = queue.Dequeue();
+                List<LevelItem> emptyNeighbors = FindEmptyNeighbors(item); 
+                PlaceCubes(item, emptyNeighbors, queue);
+            }
+
+            if (queue.Count > biggestQueueLength)
+                biggestQueueLength = queue.Count;
+        }
+
+        if (biggestQueueLength > 0)
+        {
+            StartCoroutine(Waiter(animationDuration / 10));
         }
     }
     
@@ -69,7 +94,7 @@ public class CubeController : MonoBehaviour
         return emptyNeighbors;
     }
 
-    private void PlaceCubes(LevelItem item, List<LevelItem> emptyNeighbors)
+    private void PlaceCubes(LevelItem item, List<LevelItem> emptyNeighbors, Queue<LevelItem> waitingQueue)
     {
         ItemTypes convertThisType = item.type;
         List<GameObject> newObjects = new List<GameObject>();
@@ -87,16 +112,8 @@ public class CubeController : MonoBehaviour
             var newObject = ObjectPool.SharedInstance.GetPooledObject(convertThisType, neighbor.position, Vector3.zero);
             newObjects.Add(newObject);
         }
-
-        if (emptyNeighbors.Count < 1)
-        {
-            StartCoroutine(Waiter(0f));
-        }
-        else
-        {
-            PlayPlacementAnimations(item, newObjects, 2f);
-            StartCoroutine(Waiter(2f));
-        }
+        
+        PlayPlacementAnimations(item, newObjects, animationDuration);
     }
 
     private void PlayPlacementAnimations(LevelItem item, List<GameObject> newObjects, float animationTime)
