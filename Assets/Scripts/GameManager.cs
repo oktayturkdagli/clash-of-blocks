@@ -1,15 +1,18 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 using Lean.Touch;
 using DG.Tweening;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private SOLevelData levelData;
+    private SOLevel level;
     private Camera cam;
     private bool canTouch = false;
-    private List<GameObject> playerCubes = new List<GameObject>();
+    private List<LevelItem> playerCubes = new List<LevelItem>();
     private int playerCubeCounter = 0;
+    public List<LevelItem> levelGrid;
 
     private void OnEnable()
     {
@@ -25,17 +28,24 @@ public class GameManager : MonoBehaviour
     
     private void Start()
     {
+        level = levelData.GetLevel();
+        levelGrid = level.levelItems;
         levelData.DrawLevel();
         cam = Camera.main;
         if (cam != null) cam.transform.position = levelData.GetCameraPosition();
         GameObject item = ObjectPool.SharedInstance.GetPooledObject(ItemTypes.CubeGreen, new Vector3(100,3,100), Vector3.zero);
-        playerCubes.Add(item);
+        playerCubes.Add(new LevelItem(ItemTypes.CubeGreen, new Vector3(100,3,100)));
         EventManager.current.OnStartGame();
     }
     
     private void OnStartGame()
     {
         canTouch = true;
+    }
+    
+    private void OnFinishGame()
+    {
+        Debug.Log("Game is OVER!");
     }
 
     public void OnDown(LeanFinger finger)
@@ -49,30 +59,32 @@ public class GameManager : MonoBehaviour
                 GameObject hittedObj = hit.collider.gameObject;
                 if (hittedObj.tag.Equals("Ground"))
                 {
-                    canTouch = false;
-                    playerCubes[playerCubeCounter].transform.position = new Vector3(hittedObj.transform.position.x, 3, hittedObj.transform.position.z);
-                    playerCubes[playerCubeCounter].transform.DOMoveY(0, 1f).OnComplete(() =>
-                    {
-                        playerCubeCounter++;
-                        if (playerCubeCounter > playerCubes.Count - 1)
-                        {
-                            EventManager.current.OnStartSpread();
-                        }
-                        else
-                        {
-                            canTouch = true;
-                        }
-                    });
+                    PlaceCube(hittedObj);
                 }
-                
             }
         }
     }
 
-
-    void OnFinishGame()
+    private void PlaceCube(GameObject hittedObj)
     {
-        // Debug.Log("Game is OVER!");
+        canTouch = false;
+        var hittedObjPosition = hittedObj.transform.position;
+        var item = ObjectPool.SharedInstance.GetPooledObject(playerCubes[playerCubeCounter].type, new Vector3(hittedObjPosition.x, 3, hittedObjPosition.z), Vector3.zero);
+        playerCubes[playerCubeCounter].position = hittedObjPosition; // For Grid
+        levelGrid.Remove(levelGrid.FirstOrDefault(x => x.position == hittedObj.transform.position)); //Remove the touched Ground
+        levelGrid.Add(playerCubes[playerCubeCounter]); //Remove this instead
+        item.transform.DOMoveY(0, 1f).OnComplete(() =>
+        {
+            playerCubeCounter++;
+            if (playerCubeCounter > playerCubes.Count - 1)
+            {
+                EventManager.current.OnStartSpread();
+            }
+            else
+            {
+                canTouch = true;
+            }
+        });
     }
     
 }

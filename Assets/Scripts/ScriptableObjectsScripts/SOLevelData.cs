@@ -22,5 +22,10 @@ public class SOLevelData : ScriptableObject
         z += levels[levelIndex - 1].height * 0.1f;
         return new Vector3(x, y, z);
     }
+
+    public SOLevel GetLevel()
+    {
+        return levels[levelIndex - 1];
+    }
     
 }
