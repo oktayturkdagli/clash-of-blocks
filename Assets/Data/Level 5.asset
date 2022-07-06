@@ -463,3 +463,5 @@ MonoBehaviour:
     position: {x: 13, y: 0, z: 12}
   - type: 2
     position: {x: 13, y: 0, z: 13}
+  width: 13
+  height: 13
