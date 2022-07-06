@@ -6,6 +6,8 @@ public class SOLevelData : ScriptableObject
     [SerializeField] private SOLevel[] levels;
     [SerializeField] private int levelIndex = 1;
 
+    public int LevelIndex { get => levelIndex; set => levelIndex = value; }
+
     public void DrawLevel()
     {
         if (levelIndex > levels.Length)
@@ -28,4 +30,9 @@ public class SOLevelData : ScriptableObject
         return levels[levelIndex - 1];
     }
     
+    public int GetLevelCount()
+    {
+        return levels.Length;
+    }
+
 }

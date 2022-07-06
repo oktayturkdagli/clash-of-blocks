@@ -6,18 +6,19 @@ using DG.Tweening;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private SOLevelData levelData;
-    private SOLevel level;
-    private Camera cam;
-    private bool canTouch = false;
+    [SerializeField] public SOLevelData levelData;
     private List<LevelItem> playerCubes = new List<LevelItem>();
     private int playerCubeCounter = 0;
     public List<LevelItem> levelGrid;
+    private SOLevel level;
+    private Camera cam;
+    private bool canTouch = false;
 
     private void OnEnable()
     {
         EventManager.current.onStartGame += OnStartGame;
         EventManager.current.onFinishGame += OnFinishGame;
+        EventManager.current.onEndSpread += OnEndSpread;
     }
 
     private void OnDisable()
@@ -45,7 +46,7 @@ public class GameManager : MonoBehaviour
     
     private void OnFinishGame()
     {
-        Debug.Log("Game is OVER!");
+        //Do Nothing
     }
 
     public void OnDown(LeanFinger finger)
@@ -65,6 +66,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void OnEndSpread()
+    {
+        EventManager.current.OnLastDanceTriggered(); // Go UIManager
+    }
+
     private void PlaceCube(GameObject hittedObj)
     {
         canTouch = false;
@@ -78,7 +84,7 @@ public class GameManager : MonoBehaviour
             playerCubeCounter++;
             if (playerCubeCounter > playerCubes.Count - 1)
             {
-                EventManager.current.OnStartSpread();
+                EventManager.current.OnStartSpread(); // Go CubeManager
             }
             else
             {
