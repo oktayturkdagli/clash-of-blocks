@@ -12,135 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d5ae28d932f4d2285f6c7bad2b7e7c5, type: 3}
   m_Name: Level 1
   m_EditorClassIdentifier: 
-  levelItems:
-  - type: 1
-    position: {x: 0, y: 0, z: 0}
-  - type: 1
-    position: {x: 0, y: 0, z: 1}
-  - type: 1
-    position: {x: 0, y: 0, z: 2}
-  - type: 1
-    position: {x: 0, y: 0, z: 3}
-  - type: 1
-    position: {x: 0, y: 0, z: 4}
-  - type: 1
-    position: {x: 0, y: 0, z: 5}
-  - type: 1
-    position: {x: 0, y: 0, z: 6}
-  - type: 1
-    position: {x: 0, y: 0, z: 7}
-  - type: 1
-    position: {x: 0, y: 0, z: 8}
-  - type: 1
-    position: {x: 1, y: 0, z: 0}
-  - type: 1
-    position: {x: 1, y: 0, z: 1}
-  - type: 1
-    position: {x: 1, y: 0, z: 2}
-  - type: 1
-    position: {x: 1, y: 0, z: 3}
-  - type: 1
-    position: {x: 1, y: 0, z: 4}
-  - type: 1
-    position: {x: 1, y: 0, z: 5}
-  - type: 1
-    position: {x: 1, y: 0, z: 6}
-  - type: 1
-    position: {x: 1, y: 0, z: 7}
-  - type: 1
-    position: {x: 1, y: 0, z: 8}
-  - type: 1
-    position: {x: 2, y: 0, z: 0}
-  - type: 1
-    position: {x: 2, y: 0, z: 1}
-  - type: 1
-    position: {x: 2, y: 0, z: 2}
-  - type: 1
-    position: {x: 2, y: 0, z: 3}
-  - type: 1
-    position: {x: 2, y: 0, z: 4}
-  - type: 1
-    position: {x: 2, y: 0, z: 5}
-  - type: 1
-    position: {x: 2, y: 0, z: 6}
-  - type: 1
-    position: {x: 2, y: 0, z: 7}
-  - type: 1
-    position: {x: 2, y: 0, z: 8}
-  - type: 1
-    position: {x: 3, y: 0, z: 6}
-  - type: 1
-    position: {x: 3, y: 0, z: 7}
-  - type: 1
-    position: {x: 3, y: 0, z: 8}
-  - type: 1
-    position: {x: 4, y: 0, z: 6}
-  - type: 1
-    position: {x: 4, y: 0, z: 7}
-  - type: 1
-    position: {x: 4, y: 0, z: 8}
-  - type: 1
-    position: {x: 5, y: 0, z: 6}
-  - type: 1
-    position: {x: 5, y: 0, z: 7}
-  - type: 1
-    position: {x: 5, y: 0, z: 8}
-  - type: 1
-    position: {x: 6, y: 0, z: 0}
-  - type: 1
-    position: {x: 6, y: 0, z: 1}
-  - type: 1
-    position: {x: 6, y: 0, z: 2}
-  - type: 1
-    position: {x: 6, y: 0, z: 3}
-  - type: 1
-    position: {x: 6, y: 0, z: 4}
-  - type: 1
-    position: {x: 6, y: 0, z: 5}
-  - type: 1
-    position: {x: 6, y: 0, z: 6}
-  - type: 1
-    position: {x: 6, y: 0, z: 7}
-  - type: 1
-    position: {x: 6, y: 0, z: 8}
-  - type: 1
-    position: {x: 7, y: 0, z: 0}
-  - type: 1
-    position: {x: 7, y: 0, z: 1}
-  - type: 1
-    position: {x: 7, y: 0, z: 2}
-  - type: 1
-    position: {x: 7, y: 0, z: 3}
-  - type: 1
-    position: {x: 7, y: 0, z: 4}
-  - type: 1
-    position: {x: 7, y: 0, z: 5}
-  - type: 1
-    position: {x: 7, y: 0, z: 6}
-  - type: 1
-    position: {x: 7, y: 0, z: 7}
-  - type: 1
-    position: {x: 7, y: 0, z: 8}
-  - type: 1
-    position: {x: 8, y: 0, z: 0}
-  - type: 1
-    position: {x: 8, y: 0, z: 1}
-  - type: 1
-    position: {x: 8, y: 0, z: 2}
-  - type: 1
-    position: {x: 8, y: 0, z: 3}
-  - type: 1
-    position: {x: 8, y: 0, z: 4}
-  - type: 1
-    position: {x: 8, y: 0, z: 5}
-  - type: 1
-    position: {x: 8, y: 0, z: 6}
-  - type: 1
-    position: {x: 8, y: 0, z: 7}
-  - type: 1
-    position: {x: 8, y: 0, z: 8}
+  levelGrid:
   - type: 2
-    position: {x: -1, y: 0, z: -0}
+    position: {x: -1, y: 0, z: -1}
+  - type: 2
+    position: {x: -1, y: 0, z: 0}
   - type: 2
     position: {x: -1, y: 0, z: 1}
   - type: 2
@@ -160,89 +36,97 @@ MonoBehaviour:
   - type: 2
     position: {x: -1, y: 0, z: 9}
   - type: 2
-    position: {x: -0, y: 0, z: 9}
+    position: {x: 0, y: 0, z: -1}
+  - type: 1
+    position: {x: 0, y: 0, z: 0}
+  - type: 1
+    position: {x: 0, y: 0, z: 1}
+  - type: 1
+    position: {x: 0, y: 0, z: 2}
+  - type: 1
+    position: {x: 0, y: 0, z: 3}
+  - type: 1
+    position: {x: 0, y: 0, z: 4}
+  - type: 1
+    position: {x: 0, y: 0, z: 5}
+  - type: 1
+    position: {x: 0, y: 0, z: 6}
+  - type: 1
+    position: {x: 0, y: 0, z: 7}
+  - type: 1
+    position: {x: 0, y: 0, z: 8}
   - type: 2
-    position: {x: 1, y: -0.0000009536743, z: 9}
+    position: {x: 0, y: 0, z: 9}
   - type: 2
-    position: {x: 2, y: 0.0000009536743, z: 9}
+    position: {x: 1, y: 0, z: -1}
+  - type: 1
+    position: {x: 1, y: 0, z: 0}
+  - type: 1
+    position: {x: 1, y: 0, z: 1}
+  - type: 1
+    position: {x: 1, y: 0, z: 2}
+  - type: 1
+    position: {x: 1, y: 0, z: 3}
+  - type: 1
+    position: {x: 1, y: 0, z: 4}
+  - type: 1
+    position: {x: 1, y: 0, z: 5}
+  - type: 1
+    position: {x: 1, y: 0, z: 6}
+  - type: 1
+    position: {x: 1, y: 0, z: 7}
+  - type: 1
+    position: {x: 1, y: 0, z: 8}
   - type: 2
-    position: {x: 3, y: -0.0000009536743, z: 9}
+    position: {x: 1, y: 0, z: 9}
   - type: 2
-    position: {x: 4, y: -0.0000009536743, z: 9}
+    position: {x: 2, y: 0, z: -1}
+  - type: 1
+    position: {x: 2, y: 0, z: 0}
+  - type: 1
+    position: {x: 2, y: 0, z: 1}
+  - type: 1
+    position: {x: 2, y: 0, z: 2}
+  - type: 1
+    position: {x: 2, y: 0, z: 3}
+  - type: 1
+    position: {x: 2, y: 0, z: 4}
+  - type: 1
+    position: {x: 2, y: 0, z: 5}
+  - type: 1
+    position: {x: 2, y: 0, z: 6}
+  - type: 4
+    position: {x: 2, y: 0, z: 7}
+  - type: 1
+    position: {x: 2, y: 0, z: 8}
   - type: 2
-    position: {x: 5, y: -0.0000009536743, z: 9}
-  - type: 2
-    position: {x: 6, y: 0.0000009536743, z: 9}
-  - type: 2
-    position: {x: 7, y: 0, z: 9}
-  - type: 2
-    position: {x: 8, y: 0, z: 9}
-  - type: 2
-    position: {x: 9, y: 0, z: 8}
-  - type: 2
-    position: {x: 9, y: -0.0000009536743, z: 9}
-  - type: 2
-    position: {x: 9, y: 0, z: 7}
-  - type: 2
-    position: {x: 9, y: 0, z: 5}
-  - type: 2
-    position: {x: 9, y: 0, z: 6}
-  - type: 2
-    position: {x: 9, y: 0, z: 4}
-  - type: 2
-    position: {x: 9, y: 0.0000009536743, z: 3}
-  - type: 2
-    position: {x: 9, y: -0.0000009536743, z: 2}
-  - type: 2
-    position: {x: 9, y: 0.0000009536743, z: 1}
-  - type: 2
-    position: {x: 9, y: 0, z: -0}
-  - type: 2
-    position: {x: 9, y: 0, z: -1}
-  - type: 2
-    position: {x: 8, y: 0, z: -1}
-  - type: 2
-    position: {x: 7, y: 0, z: -1}
-  - type: 2
-    position: {x: 5, y: 0, z: -1}
-  - type: 2
-    position: {x: 6, y: 0, z: -1}
-  - type: 2
-    position: {x: 4, y: 0, z: -1}
+    position: {x: 2, y: 0, z: 9}
   - type: 2
     position: {x: 3, y: 0, z: -1}
   - type: 2
-    position: {x: 2, y: 0, z: -1}
-  - type: 2
-    position: {x: 1, y: 0, z: -1}
-  - type: 2
-    position: {x: -0, y: 0, z: -1}
-  - type: 2
-    position: {x: -1, y: -0.0000009536743, z: -1}
-  - type: 2
     position: {x: 3, y: 0, z: 0}
   - type: 2
-    position: {x: 4, y: 0, z: -0}
+    position: {x: 3, y: 0, z: 1}
   - type: 2
-    position: {x: 5, y: 0, z: -0}
+    position: {x: 3, y: 0, z: 2}
   - type: 2
-    position: {x: 5, y: 0, z: 1}
-  - type: 2
-    position: {x: 5, y: 0, z: 5}
-  - type: 2
-    position: {x: 4, y: 0, z: 5}
-  - type: 2
-    position: {x: 3, y: 0, z: 5}
+    position: {x: 3, y: 0, z: 3}
   - type: 2
     position: {x: 3, y: 0, z: 4}
   - type: 2
-    position: {x: 4, y: 0, z: 4}
+    position: {x: 3, y: 0, z: 5}
+  - type: 1
+    position: {x: 3, y: 0, z: 6}
+  - type: 1
+    position: {x: 3, y: 0, z: 7}
+  - type: 1
+    position: {x: 3, y: 0, z: 8}
   - type: 2
-    position: {x: 5, y: 0, z: 4}
+    position: {x: 3, y: 0, z: 9}
   - type: 2
-    position: {x: 5, y: 0, z: 3}
+    position: {x: 4, y: 0, z: -1}
   - type: 2
-    position: {x: 5, y: 0, z: 2}
+    position: {x: 4, y: 0, z: -0}
   - type: 2
     position: {x: 4, y: 0, z: 1}
   - type: 2
@@ -250,12 +134,124 @@ MonoBehaviour:
   - type: 2
     position: {x: 4, y: 0, z: 3}
   - type: 2
-    position: {x: 3, y: 0, z: 3}
+    position: {x: 4, y: 0, z: 4}
   - type: 2
-    position: {x: 3, y: 0, z: 2}
+    position: {x: 4, y: 0, z: 5}
+  - type: 1
+    position: {x: 4, y: 0, z: 6}
+  - type: 1
+    position: {x: 4, y: 0, z: 7}
+  - type: 1
+    position: {x: 4, y: 0, z: 8}
   - type: 2
-    position: {x: 3, y: 0, z: 1}
-  - type: 4
-    position: {x: 1, y: 0, z: 7}
-  width: 9
-  height: 9
+    position: {x: 4, y: 0, z: 9}
+  - type: 2
+    position: {x: 5, y: 0, z: -1}
+  - type: 2
+    position: {x: 5, y: 0, z: -0}
+  - type: 2
+    position: {x: 5, y: 0, z: 1}
+  - type: 2
+    position: {x: 5, y: 0, z: 2}
+  - type: 2
+    position: {x: 5, y: 0, z: 3}
+  - type: 2
+    position: {x: 5, y: 0, z: 4}
+  - type: 2
+    position: {x: 5, y: 0, z: 5}
+  - type: 1
+    position: {x: 5, y: 0, z: 6}
+  - type: 1
+    position: {x: 5, y: 0, z: 7}
+  - type: 1
+    position: {x: 5, y: 0, z: 8}
+  - type: 2
+    position: {x: 5, y: 0, z: 9}
+  - type: 2
+    position: {x: 6, y: 0, z: -1}
+  - type: 1
+    position: {x: 6, y: 0, z: 0}
+  - type: 1
+    position: {x: 6, y: 0, z: 1}
+  - type: 1
+    position: {x: 6, y: 0, z: 2}
+  - type: 1
+    position: {x: 6, y: 0, z: 3}
+  - type: 1
+    position: {x: 6, y: 0, z: 4}
+  - type: 1
+    position: {x: 6, y: 0, z: 5}
+  - type: 1
+    position: {x: 6, y: 0, z: 6}
+  - type: 1
+    position: {x: 6, y: 0, z: 7}
+  - type: 1
+    position: {x: 6, y: 0, z: 8}
+  - type: 2
+    position: {x: 6, y: 0, z: 9}
+  - type: 2
+    position: {x: 7, y: 0, z: -1}
+  - type: 1
+    position: {x: 7, y: 0, z: 0}
+  - type: 1
+    position: {x: 7, y: 0, z: 1}
+  - type: 1
+    position: {x: 7, y: 0, z: 2}
+  - type: 1
+    position: {x: 7, y: 0, z: 3}
+  - type: 1
+    position: {x: 7, y: 0, z: 4}
+  - type: 1
+    position: {x: 7, y: 0, z: 5}
+  - type: 1
+    position: {x: 7, y: 0, z: 6}
+  - type: 1
+    position: {x: 7, y: 0, z: 7}
+  - type: 1
+    position: {x: 7, y: 0, z: 8}
+  - type: 2
+    position: {x: 7, y: 0, z: 9}
+  - type: 2
+    position: {x: 8, y: 0, z: -1}
+  - type: 1
+    position: {x: 8, y: 0, z: 0}
+  - type: 1
+    position: {x: 8, y: 0, z: 1}
+  - type: 1
+    position: {x: 8, y: 0, z: 2}
+  - type: 1
+    position: {x: 8, y: 0, z: 3}
+  - type: 1
+    position: {x: 8, y: 0, z: 4}
+  - type: 1
+    position: {x: 8, y: 0, z: 5}
+  - type: 1
+    position: {x: 8, y: 0, z: 6}
+  - type: 1
+    position: {x: 8, y: 0, z: 7}
+  - type: 1
+    position: {x: 8, y: 0, z: 8}
+  - type: 2
+    position: {x: 8, y: 0, z: 9}
+  - type: 2
+    position: {x: 9, y: 0, z: -1}
+  - type: 2
+    position: {x: 9, y: 0, z: 0}
+  - type: 2
+    position: {x: 9, y: 0, z: 1}
+  - type: 2
+    position: {x: 9, y: 0, z: 2}
+  - type: 2
+    position: {x: 9, y: 0, z: 3}
+  - type: 2
+    position: {x: 9, y: 0, z: 4}
+  - type: 2
+    position: {x: 9, y: 0, z: 5}
+  - type: 2
+    position: {x: 9, y: 0, z: 6}
+  - type: 2
+    position: {x: 9, y: 0, z: 7}
+  - type: 2
+    position: {x: 9, y: 0, z: 8}
+  - type: 2
+    position: {x: 9, y: 0, z: 9}

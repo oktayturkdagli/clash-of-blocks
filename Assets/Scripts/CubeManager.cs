@@ -33,6 +33,7 @@ public class CubeManager : MonoBehaviour
 
     private void FindStartItemsAndAddQueue()
     {
+        // Objects in the scene are added to the queue
         for (int i = 0; i < gameManager.levelGrid.Count; i++)
         {
             if (gameManager.levelGrid[i].type is ItemTypes.CubeGreen)
@@ -50,7 +51,7 @@ public class CubeManager : MonoBehaviour
         }
     }
     
-    // When the placement animations are finished, return to this method again.
+    // When the placement are finished, return to this method again.
     private void HandleQueue()
     {
         int biggestQueueLength = 0;

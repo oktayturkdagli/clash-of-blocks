@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Scriptable Objects/Level Data", fileName = "New Level Data")]
-public class SOLevelData : ScriptableObject
+[CreateAssetMenu(menuName = "Scriptable Objects/Levels Data", fileName = "New Levels Data")]
+public class SOLevelsData : ScriptableObject
 {
     [SerializeField] private SOLevel[] levels;
     [SerializeField] private int levelIndex = 1;
@@ -19,9 +19,9 @@ public class SOLevelData : ScriptableObject
     public Vector3 GetCameraPosition()
     {
         float x = 0f, y = 6, z = -2f;
-        x += levels[levelIndex - 1].width * 0.45f;
-        y += levels[levelIndex - 1].width * 2f;
-        z += levels[levelIndex - 1].height * 0.1f;
+        x += levels[levelIndex - 1].Width * 0.45f;
+        y += levels[levelIndex - 1].Width * 2f;
+        z += levels[levelIndex - 1].Height * 0.1f;
         return new Vector3(x, y, z);
     }
 

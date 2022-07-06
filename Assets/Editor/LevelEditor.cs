@@ -20,8 +20,8 @@ public class LevelEditor : Editor
     private void OnEnable()
     {
         level = target as SOLevel;
-        width = level.width;
-        height = level.height;
+        width = level.Width;
+        height = level.Height;
         SceneView.duringSceneGui += OnScene;
     }
 
@@ -54,8 +54,8 @@ public class LevelEditor : Editor
         GUILayout.Label("Height", EditorStyles.boldLabel);
         height = EditorGUILayout.IntField(height);
         GUILayout.EndHorizontal();
-        level.width = width;
-        level.height = height;
+        level.Width = width;
+        level.Height = height;
 
         DrawButtons();
         
@@ -80,29 +80,29 @@ public class LevelEditor : Editor
     
     private void Draw3DObjectOnScene()
     {
-        for (int i = 0; i < level.levelItems.Count; i++)
+        for (int i = 0; i < level.levelGrid.Count; i++)
         {
-            switch (level.levelItems[i].type)
+            switch (level.levelGrid[i].type)
             {
                 case ItemTypes.Ground:
                     Handles.color = Color.white;
-                    Handles.DrawWireCube(level.levelItems[i].position, new Vector3(1,0f,1));
+                    Handles.DrawWireCube(level.levelGrid[i].position, new Vector3(1,0f,1));
                     break;
                 case ItemTypes.Border:
                     Handles.color = Color.black;
-                    Handles.DrawWireCube(level.levelItems[i].position, Vector3.one);
+                    Handles.DrawWireCube(level.levelGrid[i].position, Vector3.one);
                     break;
                 case ItemTypes.CubeGreen:
                     Handles.color = Color.green;
-                    Handles.DrawWireCube(level.levelItems[i].position, Vector3.one);
+                    Handles.DrawWireCube(level.levelGrid[i].position, Vector3.one);
                     break;
                 case ItemTypes.CubeRed:
                     Handles.color = Color.red;
-                    Handles.DrawWireCube(level.levelItems[i].position, Vector3.one);
+                    Handles.DrawWireCube(level.levelGrid[i].position, Vector3.one);
                     break;
                 case ItemTypes.CubeYellow:
                     Handles.color = Color.yellow;
-                    Handles.DrawWireCube(level.levelItems[i].position, Vector3.one);
+                    Handles.DrawWireCube(level.levelGrid[i].position, Vector3.one);
                     break;
             }
         }
@@ -146,17 +146,17 @@ public class LevelEditor : Editor
             return;
         
         LevelItem levelItem = new LevelItem(tempItemType, position);
-        level.levelItems.Add(levelItem);
+        level.levelGrid.Add(levelItem);
     }
     
     private void CreateGround()
     {
-        level.levelItems.Clear();
-        for (var i = 0; i < level.width; i++)
+        level.levelGrid.Clear();
+        for (var i = 0; i < level.Width; i++)
         {
             var position = Vector3.zero;
 
-            for (var j = 0; j < level.height; j++)
+            for (var j = 0; j < level.Height; j++)
             {
                 position = new Vector3(i, 0f, j);
                 selectedItem = 1;
@@ -170,7 +170,7 @@ public class LevelEditor : Editor
                     CreateObject(position);
                 }
                 
-                if (j == level.height - 1)
+                if (j == level.Height - 1)
                 {
                     selectedItem = 2;
                     position = new Vector3(i, 0f, j+1);
@@ -184,7 +184,7 @@ public class LevelEditor : Editor
                     CreateObject(position);
                 }
                 
-                if (i == level.width - 1)
+                if (i == level.Width - 1)
                 {
                     selectedItem = 2;
                     position = new Vector3(i + 1, 0f, j);
@@ -201,20 +201,12 @@ public class LevelEditor : Editor
     
     private void RemoveAt(Vector3 position)
     {
-        for (int i = 0; i < level.levelItems.Count; i++)
+        for (int i = 0; i < level.levelGrid.Count; i++)
         {
-            if (level.levelItems[i].position == position)
+            if (level.levelGrid[i].position == position)
             {
-                if (level.levelItems[i].type == ItemTypes.Ground && 
-                    (itemTypesText[selectedItem].Equals("CubeRed") || itemTypesText[selectedItem].Equals("CubeGreen") || itemTypesText[selectedItem].Equals("CubeYellow")))
-                {
-                    //Do Nothing
-                }
-                else
-                {
-                    level.levelItems.RemoveAt(i);
-                    break;
-                }
+                level.levelGrid.RemoveAt(i);
+                break;
             }
         }
     }
@@ -225,11 +217,11 @@ public class LevelEditor : Editor
         if (tempItemType == ItemTypes.Null)
             return;
 
-        for (int i = 0; i < level.levelItems.Count; i++)
+        for (int i = 0; i < level.levelGrid.Count; i++)
         {
-            if (level.levelItems[i].type == tempItemType)
+            if (level.levelGrid[i].type == tempItemType)
             {
-                level.levelItems.RemoveAt(i);
+                level.levelGrid.RemoveAt(i);
                 i--;
             }
         }

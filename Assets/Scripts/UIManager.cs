@@ -29,7 +29,7 @@ public class UIManager : MonoBehaviour
             statisticDictionary.Add((ItemTypes)(i + 3), statisticObjects[i]);
         }
 
-        levelText.text = "LEVEL " + gameManager.levelData.LevelIndex;
+        levelText.text = "LEVEL " + gameManager.levelsData.LevelIndex;
         celebrationText = win.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
         levelCompleteText = win.transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>();
         consolationText = lose.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
@@ -177,7 +177,9 @@ public class UIManager : MonoBehaviour
             {
                 if (gameManager.levelGrid[j].type == statisticDictionary.ElementAt(i).Key)
                 {
-                    canvasItem.transform.position = cam.WorldToScreenPoint(gameManager.levelGrid[j].position);
+                    Vector3 offset = new Vector3(-100, 100, 0);
+                    canvasItem.transform.position = cam.WorldToScreenPoint(gameManager.levelGrid[j].position) + offset;
+                    
                     break;
                 }
             }
@@ -210,9 +212,9 @@ public class UIManager : MonoBehaviour
     
     private void IncreaseLevel()
     {
-        if (gameManager.levelData.LevelIndex + 1 <= gameManager.levelData.GetLevelCount())
+        if (gameManager.levelsData.LevelIndex + 1 <= gameManager.levelsData.GetLevelCount())
         {
-            gameManager.levelData.LevelIndex++;
+            gameManager.levelsData.LevelIndex++;
         }
     }
     

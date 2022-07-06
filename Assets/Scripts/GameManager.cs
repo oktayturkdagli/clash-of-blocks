@@ -6,7 +6,7 @@ using DG.Tweening;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] public SOLevelData levelData;
+    [SerializeField] public SOLevelsData levelsData;
     private List<LevelItem> playerCubes = new List<LevelItem>();
     private int playerCubeCounter = 0;
     public List<LevelItem> levelGrid;
@@ -29,11 +29,11 @@ public class GameManager : MonoBehaviour
     
     private void Start()
     {
-        level = levelData.GetLevel();
-        levelGrid = level.levelItems;
-        levelData.DrawLevel();
+        level = levelsData.GetLevel();
+        levelGrid = level.levelGrid;
+        levelsData.DrawLevel();
         cam = Camera.main;
-        if (cam != null) cam.transform.position = levelData.GetCameraPosition();
+        if (cam != null) cam.transform.position = levelsData.GetCameraPosition();
         GameObject item = ObjectPool.SharedInstance.GetPooledObject(ItemTypes.CubeGreen, new Vector3(100,3,100), Vector3.zero);
         playerCubes.Add(new LevelItem(ItemTypes.CubeGreen, new Vector3(100,3,100)));
         EventManager.current.OnStartGame();
@@ -47,6 +47,11 @@ public class GameManager : MonoBehaviour
     private void OnFinishGame()
     {
         //Do Nothing
+    }
+    
+    private void OnEndSpread()
+    {
+        EventManager.current.OnLastDanceTriggered(); // Go UIManager
     }
 
     public void OnDown(LeanFinger finger)
@@ -66,11 +71,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void OnEndSpread()
-    {
-        EventManager.current.OnLastDanceTriggered(); // Go UIManager
-    }
-
     private void PlaceCube(GameObject hittedObj)
     {
         canTouch = false;
@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                canTouch = true;
+                canTouch = false;
             }
         });
     }
