@@ -277,3 +277,5 @@ MonoBehaviour:
     position: {x: 9, y: 0, z: 9}
   - type: 2
     position: {x: 9, y: 0, z: 10}
+  width: 5
+  height: 5
