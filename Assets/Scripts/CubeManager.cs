@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,14 +11,16 @@ public class CubeManager : MonoBehaviour
     [SerializeField] private float animationDuration = 1f;
     private readonly Dictionary<ItemTypes, Queue<LevelItem>> queues = new Dictionary<ItemTypes, Queue<LevelItem>>();
     private readonly Vector3[] directions = { Vector3.left, Vector3.right, Vector3.forward, Vector3.back };
-
+    private int itemTypesCount = 0;
 
     private void OnEnable()
     {
         EventManager.current.onStartSpread += OnStartSpread;
-        queues.Add(ItemTypes.CubeGreen, new Queue<LevelItem>());
-        queues.Add(ItemTypes.CubeRed, new Queue<LevelItem>());
-        queues.Add(ItemTypes.CubeYellow, new Queue<LevelItem>());
+        itemTypesCount = Enum.GetNames(typeof(ItemTypes)).Length;
+        for (int i = 3; i < itemTypesCount; i++)
+        {
+            queues.Add((ItemTypes)i, new Queue<LevelItem>());
+        }
     }
 
     private void OnDisable()
@@ -33,20 +36,15 @@ public class CubeManager : MonoBehaviour
 
     private void FindStartItemsAndAddQueue()
     {
-        // Objects in the scene are added to the queue
-        for (int i = 0; i < gameManager.levelGrid.Count; i++)
+        // Objects in the scene are adding to the queue
+        for (var i = 0; i < gameManager.levelGrid.Count; i++)
         {
-            if (gameManager.levelGrid[i].type is ItemTypes.CubeGreen)
+            for (var j = 3; j < itemTypesCount; j++)
             {
-                queues[ItemTypes.CubeGreen].Enqueue(gameManager.levelGrid[i]);
-            }
-            else if (gameManager.levelGrid[i].type is ItemTypes.CubeRed)
-            {
-                queues[ItemTypes.CubeRed].Enqueue(gameManager.levelGrid[i]);
-            }
-            else if (gameManager.levelGrid[i].type is ItemTypes.CubeYellow)
-            {
-                queues[ItemTypes.CubeYellow].Enqueue(gameManager.levelGrid[i]);
+                if (gameManager.levelGrid[i].type == (ItemTypes)j)
+                {
+                    queues[(ItemTypes)j].Enqueue(gameManager.levelGrid[i]);
+                }
             }
         }
     }
@@ -57,21 +55,22 @@ public class CubeManager : MonoBehaviour
         int biggestQueueLength = 0;
         for (int i = 0; i < queues.Count; i++)
         {
-            Queue<LevelItem> queue = queues.ElementAt(i).Value;
-            if (queue.Count > 0)
+            Queue<LevelItem> itemTypeQueue = queues.ElementAt(i).Value;
+            int tempQueueCount = itemTypeQueue.Count;
+            for (int j = 0; j < tempQueueCount; j++)
             {
-                LevelItem item = queue.Dequeue();
+                LevelItem item = itemTypeQueue.Dequeue();
                 List<LevelItem> emptyNeighbors = FindEmptyNeighbors(item); 
-                PlaceCubes(item, emptyNeighbors, queue);
+                PlaceCubes(item, emptyNeighbors, itemTypeQueue);
             }
 
-            if (queue.Count > biggestQueueLength)
-                biggestQueueLength = queue.Count;
+            if (itemTypeQueue.Count > biggestQueueLength)
+                biggestQueueLength = itemTypeQueue.Count;
         }
 
         if (biggestQueueLength > 0)
         {
-            StartCoroutine(Waiter(animationDuration / 10));
+            StartCoroutine(Waiter(animationDuration / 5));
         }
         else
         {

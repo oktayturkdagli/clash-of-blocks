@@ -170,19 +170,24 @@ public class UIManager : MonoBehaviour
 
     private void PlaceStatisticsOnCanvas()
     {
+        
         for (int i = 0; i < statisticDictionary.Count; i++)
         {
             GameObject canvasItem = statisticDictionary.ElementAt(i).Value;
+            Vector3 newPosition = Vector3.zero;
+            int counter = 0;
             for (int j = 0; j < gameManager.levelGrid.Count; j++)
             {
                 if (gameManager.levelGrid[j].type == statisticDictionary.ElementAt(i).Key)
                 {
-                    Vector3 offset = new Vector3(-100, 100, 0);
-                    canvasItem.transform.position = cam.WorldToScreenPoint(gameManager.levelGrid[j].position) + offset;
-                    
-                    break;
+                    newPosition += gameManager.levelGrid[j].position;
+                    counter++;
                 }
             }
+
+            newPosition = newPosition / counter;
+            Vector3 offset = new Vector3(-100, 100, 0);
+            canvasItem.transform.position = cam.WorldToScreenPoint(newPosition) + offset;
         }
     }
 
